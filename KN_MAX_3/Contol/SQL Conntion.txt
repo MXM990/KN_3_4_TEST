@@ -1,0 +1,1 @@
+﻿Server =.\MXM ;Database = master ; User Id = sa ; Password = 123;
