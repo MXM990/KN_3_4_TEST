@@ -33,8 +33,7 @@ namespace KN_MAX_3.SQL
             List<SqlParameter> parameters = new List<SqlParameter>
             {
                 new SqlParameter("@Guid_Class", Guid.NewGuid()),
-                new SqlParameter("@Name_Class", Name_Class),
-                new SqlParameter("@MAX_STUDNT", max_size)
+                new SqlParameter("@Name_Class", Name_Class)
             };
 
             return SQL_DO_IT.Exec_proc("PR_Insert_Class", parameters);
@@ -69,61 +68,13 @@ namespace KN_MAX_3.SQL
         
         public bool InsertStudentInClass(Guid Class_guid, Guid stu_guid)
         {
-            try
-            {
-                if (!SQL_DO_IT.OpenConntion()) return false;
-
-                string Qur_Insert_stu_CLASS = "INSERT INTO STU_CLASS VALUES (NEWID() , @CLASS_GUID_SENDER , @STU_GUID_SENDER)";
-
-                using (SqlCommand cmd = new SqlCommand(Qur_Insert_stu_CLASS, SQL_DO_IT.CON_all))
-                {
-                    cmd.Parameters.AddWithValue("@CLASS_GUID_SENDER", Class_guid);
-                    cmd.Parameters.AddWithValue("@STU_GUID_SENDER", stu_guid);
-                    cmd.ExecuteNonQuery();
-                    return true;
-                }
-            }
-            catch
-            {
-                return false;
-            }
-            finally
-            {
-                SQL_DO_IT.CloseConntion();
-            }
+            return true;
         }
 
        
         public bool insertTehcNew(Guid id_class, string name_th)
         {
-            try
-            {
-                if (!SQL_DO_IT.OpenConntion()) return false;
-
-                string Quray = @"DECLARE @GUID UNIQUEIDENTIFIER
-                                 SET @GUID = (SELECT TOP 1 ID FROM TECH WHERE NAME_TECH = @nameTH)
-                                 
-                                 IF @GUID IS NOT NULL
-                                 BEGIN 
-                                     INSERT INTO TECH_CLASS VALUES (NEWID() , @GUIDCLASS , @GUID)
-                                 END";
-
-                using (SqlCommand cmd = new SqlCommand(Quray, SQL_DO_IT.CON_all))
-                {
-                    cmd.Parameters.AddWithValue("@nameTH", name_th);
-                    cmd.Parameters.AddWithValue("@GUIDCLASS", id_class);
-                    int rowsAffected = cmd.ExecuteNonQuery();
-                    return rowsAffected > 0;
-                }
-            }
-            catch
-            {
-                return false;
-            }
-            finally
-            {
-                SQL_DO_IT.CloseConntion();
-            }
+            return true;
         }
     }
 }

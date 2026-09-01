@@ -34,7 +34,7 @@ namespace KN_MAX_3.SQL
                             GR_list.Add(new model
                             {
                                 ID = Guid.Parse(reader["ID"].ToString()),
-                                type = reader["KIND"].ToString()
+                                Name = reader["KIND"].ToString()
                             });
                         }
                     }

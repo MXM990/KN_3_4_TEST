@@ -45,29 +45,6 @@ namespace KN_MAX_3.Contol
                     VALUES (NEWID(), @NAME_TECH, @PHONE, @GUID_GEN)')
             END";
 
-        static private readonly string PR_Insert_Stu_Class = @"
-            IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PR_Insert_Stu_Class]') AND type in (N'P', N'PC'))
-            BEGIN
-                EXEC('CREATE PROC PR_Insert_Stu_Class (@CLASS_GUID UNIQUEIDENTIFIER, @STU_GUID UNIQUEIDENTIFIER)
-                AS
-                    INSERT INTO STU_CLASS
-                    VALUES (NEWID(), @CLASS_GUID, @STU_GUID)')
-            END";
-
-        static private readonly string PR_Insert_Tech_Class = @"
-            IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PR_Insert_Tech_Class]') AND type in (N'P', N'PC'))
-            BEGIN
-                EXEC('CREATE PROC PR_Insert_Tech_Class (@CLASS_GUID UNIQUEIDENTIFIER, @TECH_NAME VARCHAR(255))
-                AS
-                    DECLARE @TECH_GUID UNIQUEIDENTIFIER
-                    SET @TECH_GUID = (SELECT TOP 1 ID FROM TECH WHERE NAME_TECH = @TECH_NAME)
-
-                    IF @TECH_GUID IS NOT NULL
-                    BEGIN
-                        INSERT INTO TECH_CLASS
-                        VALUES (NEWID(), @CLASS_GUID, @TECH_GUID)
-                    END')
-            END";
 
 
         static private readonly string PR_Get_Gender = @"
@@ -98,10 +75,7 @@ namespace KN_MAX_3.Contol
         {
             PR_InsertGender,
             PR_Insert_Class,
-            PR_Insert_Student,
             PR_Insert_Tech,
-            PR_Insert_Stu_Class,
-            PR_Insert_Tech_Class,
             PR_Get_Gender,
             PR_Get_Class,
             PR_Check_Student

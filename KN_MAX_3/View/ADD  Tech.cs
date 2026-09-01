@@ -37,7 +37,7 @@ namespace KN_MAX_3
         private void ADD_bt_Click(object sender, EventArgs e)
         {
             m_add = new Insert();
-            if (m_add.InsertTech(name_th.Text, phone_th.Text, Gender_Select.Text))
+            if (!m_add.InsertTech(name_th.Text, phone_th.Text, Gender_Select.Text))
             {
                 MessageBox.Show("ADD Done");
             }
